@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "d60f6ac2-a367-4686-bce0-906d441f3dc1",
+		"name": "Sooft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "3209344"
+	},
+	"item": [
+		{
+			"name": "Adhesion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\r\n\t\"cuit\":\"20167727981\",\r\n\t\"razon_social\":\"Mi Empresa\",\r\n\t\"fecha_adhesion\":\"2025-01-01\",\r\n\t\"telefono\":\"12345657\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/itbk/empresa"
+			},
+			"response": []
+		},
+		{
+			"name": "ImportEmpresas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\": 1,\r\n        \"cuit\":\"20167727981\",\r\n        \"razon_social\":\"Mi Empresa\",\r\n        \"fecha_adhesion\":\"2025-01-01\",\r\n        \"telefono\":\"12345657\"\r\n    },\r\n    {   \r\n        \"id\": 2,\r\n        \"cuit\":\"20160201271\",\r\n        \"razon_social\":\"Tu Empresa\",\r\n        \"fecha_adhesion\":\"2025-02-01\",\r\n        \"telefono\":\"111222333\"\r\n    }    \r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/itbk/empresa/import"
+			},
+			"response": []
+		},
+		{
+			"name": "PostEmpresa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 88,\r\n    \"cuit\":\"20168888881\",\r\n    \"razon_social\":\"Empresa\",\r\n    \"fecha_adhesion\":\"2025-02-02\",\r\n    \"telefono\":\"12888888\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/itbk/empresa"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Empresa",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 88,\r\n    \"cuit\":\"20168888881\",\r\n    \"razon_social\":\"Empresa\",\r\n    \"fecha_adhesion\":\"2025-02-02\",\r\n    \"telefono\":\"12888888\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/itbk/empresa/1"
+			},
+			"response": []
+		},
+		{
+			"name": "ImportTransferencias",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"empresaId\":1,\r\n        \"importe\":1000,\r\n        \"fecha_transferencia\":\"2025-01-01\",\r\n        \"cuenta_debito\": \"11111111\",\r\n        \"cuenta_credito\":\"22222222\"\r\n    },\r\n    {\r\n        \"empresaId\":2,\r\n        \"importe\":2000,\r\n        \"fecha_transferencia\":\"2025-02-01\",\r\n        \"cuenta_debito\":\"33333333\",\r\n        \"cuenta_credito\":\"44444444\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/itbk/transferencia/import"
+			},
+			"response": []
+		},
+		{
+			"name": "Post Transferencia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"empresaId\":1,\r\n    \"importe\":\"1000.88\",\r\n    \"fecha_transferencia\":\"2025-01-01\",\r\n    \"cuenta_debito\": \"11111111\",\r\n    \"cuenta_credito\":\"88888888\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/itbk/transferencia"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllEmpresas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/itbk/empresa/all"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllTransferencia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/itbk/transferencia/all"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllEmpresas AddedLastMonth",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/itbk/empresas/addedlastmonth"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllTransferencias LastMonth",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/itbk/transferencia/lastmonth"
+			},
+			"response": []
+		}
+	]
+}
