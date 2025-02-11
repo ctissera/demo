@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "com.mycompany.demo.maxvalues")
 public class DemoSettings {
 	
-	public static final Integer MAX_MOVIES_PERSON = 1;
+	public static final Integer MAX_TRANS = 1;
 
 
 }
