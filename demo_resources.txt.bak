@@ -1,0 +1,357 @@
+<<<<<<< HEAD
+//
+// EMPRESAS
+//
+
+1) Importar varias empresas
+	http://localhost:8080/itbk/empresa/import	POST
+		request body
+			[
+				{
+					"cuit":"20167727980",
+					"razon_social":"Mi Empresa",
+					"fecha_adhesion":"2025-01-01",
+					"telefono":"12345657"
+				},
+				{   
+					"cuit":"20160201278",
+					"razon_social":"Tu Empresa",
+					"fecha_adhesion":"2025-02-01",
+					"telefono":"111222333"
+				}    
+			]
+		response -> Cantidad de registros importados
+			2
+			
+2) crear registro una empresas
+	http://localhost:8080/itbk/empresa	POST
+
+		request body
+			{
+				"cuit":"20168888882",
+				"razon_social":"Empresa 88",
+				"fecha_adhesion":"2025-02-02",
+				"telefono":"12888888"
+			}
+		response
+			{
+				"id": 3,
+				"cuit": "20168888882",
+				"razon_social": "Empresa 88",
+				"fecha_adhesion": "2025-02-02",
+				"telefono": "12888888"
+			}
+
+3) Obtener todas las empresas
+	http://localhost:8080/itbk/empresa/all	GET
+		Response
+		[
+			{
+				"id": 1,
+				"cuit": "20167727980",
+				"razon_social": "Mi Empresa",
+				"fecha_adhesion": "2025-01-01",
+				"telefono": "12345657"
+			},
+			{
+				"id": 2,
+				"cuit": "20160201278",
+				"razon_social": "Tu Empresa",
+				"fecha_adhesion": "2025-02-01",
+				"telefono": "111222333"
+			}
+		]
+
+4) Obtener las empresas adheridas en el ultimo mes
+	http://localhost:8080/itbk/empresas/addedlastmonth	GET
+		Response
+	[
+		{
+			"id": 2,
+			"cuit": "20160201278",
+			"razon_social": "Tu Empresa",
+			"fecha_adhesion": "2025-02-01",
+			"telefono": "111222333"
+		}
+	]
+
+5) Eliminar una empresa
+http://localhost:8080/itbk/empresa/1		DELETE
+
+//
+// TRANSFERENCIAS
+//
+6) Importar varios registros de transferencias
+
+	http://localhost:8080/itbk/transferencia/import		POST
+		request body
+			[
+				{
+					"empresaId":1,
+					"importe":1000,
+					"fecha_transferencia":"2025-01-01",
+					"cuenta_debito": "11111111",
+					"cuenta_credito":"22222222"
+				},
+				{
+					"empresaId":2,
+					"importe":2000,
+					"fecha_transferencia":"2025-02-01",
+					"cuenta_debito":"33333333",
+					"cuenta_credito":"44444444"
+				}
+			]
+		response
+			[
+				{
+					"id": 2,
+					"empresaId": 1,
+					"importe": 1000.0,
+					"fecha_transferencia": "2025-01-01",
+					"cuenta_debito": "11111111",
+					"cuenta_credito": "22222222"
+				},
+				{
+					"id": 3,
+					"empresaId": 2,
+					"importe": 2000.0,
+					"fecha_transferencia": "2025-02-01",
+					"cuenta_debito": "33333333",
+					"cuenta_credito": "44444444"
+				}
+			]
+7) Crear un registro de una transferencia
+	http://localhost:8080/itbk/transferencia		POST
+		request body
+			{
+				"empresaId":1,
+				"importe":"1000.88",
+				"fecha_transferencia":"2025-01-01",
+				"cuenta_debito": "11111111",
+				"cuenta_credito":"88888888"
+			}
+		response
+			{
+				"id": 1,
+				"empresaId": 1,
+				"importe": 1000.88,
+				"fecha_transferencia": "2025-01-01",
+				"cuenta_debito": "11111111",
+				"cuenta_credito": "88888888"
+			}
+
+8) Obtener todos los registros de transferencias
+	http://localhost:8080/itbk/transferencia/all		GET
+		Response
+			[
+				{
+					"id": 2,
+					"empresaId": 2,
+					"importe": 0.0,
+					"fecha_transferencia": "2025-02-01",
+					"cuenta_debito": "33333333",
+					"cuenta_credito": "44444444"
+				},
+				{
+					"id": 1,
+					"empresaId": 1,
+					"importe": 0.0,
+					"fecha_transferencia": "2025-01-01",
+					"cuenta_debito": "11111111",
+					"cuenta_credito": "22222222"
+				}
+			]
+
+9) Obtener todos los registros de transferencias de ultimo mes
+	http://localhost:8080/itbk/transferencia/lastmonth	GET
+		Response
+			[
+				{
+					"id": 2,
+					"empresaId": 2,
+					"importe": 2000.0,
+					"fecha_transferencia": "2025-02-01",
+					"cuenta_debito": "33333333",
+					"cuenta_credito": "44444444"
+				}
+			]
+
+=======
+//
+// EMPRESAS
+//
+
+1) Importar varias empresas
+	http://localhost:8080/itbk/empresa/import	POST
+		request body
+			[
+				{
+					"cuit":"20167727980",
+					"razon_social":"Mi Empresa",
+					"fecha_adhesion":"2025-01-01",
+					"telefono":"12345657"
+				},
+				{   
+					"cuit":"20160201278",
+					"razon_social":"Tu Empresa",
+					"fecha_adhesion":"2025-02-01",
+					"telefono":"111222333"
+				}    
+			]
+		response -> Cantidad de registros importados
+			2
+			
+2) crear registro una empresas
+	http://localhost:8080/itbk/empresa	POST
+
+		request body
+			{
+				"cuit":"20168888882",
+				"razon_social":"Empresa 88",
+				"fecha_adhesion":"2025-02-02",
+				"telefono":"12888888"
+			}
+		response
+			{
+				"id": 3,
+				"cuit": "20168888882",
+				"razon_social": "Empresa 88",
+				"fecha_adhesion": "2025-02-02",
+				"telefono": "12888888"
+			}
+
+3) Obtener todas las empresas
+	http://localhost:8080/itbk/empresa/all	GET
+		Response
+		[
+			{
+				"id": 1,
+				"cuit": "20167727980",
+				"razon_social": "Mi Empresa",
+				"fecha_adhesion": "2025-01-01",
+				"telefono": "12345657"
+			},
+			{
+				"id": 2,
+				"cuit": "20160201278",
+				"razon_social": "Tu Empresa",
+				"fecha_adhesion": "2025-02-01",
+				"telefono": "111222333"
+			}
+		]
+
+4) Obtener las empresas adheridas en el ultimo mes
+	http://localhost:8080/itbk/empresas/addedlastmonth	GET
+		Response
+	[
+		{
+			"id": 2,
+			"cuit": "20160201278",
+			"razon_social": "Tu Empresa",
+			"fecha_adhesion": "2025-02-01",
+			"telefono": "111222333"
+		}
+	]
+
+5) Eliminar una empresa
+http://localhost:8080/itbk/empresa/1		DELETE
+
+//
+// TRANSFERENCIAS
+//
+6) Importar varios registros de transferencias
+
+	http://localhost:8080/itbk/transferencia/import		POST
+		request body
+			[
+				{
+					"empresaId":1,
+					"importe":1000,
+					"fecha_transferencia":"2025-01-01",
+					"cuenta_debito": "11111111",
+					"cuenta_credito":"22222222"
+				},
+				{
+					"empresaId":2,
+					"importe":2000,
+					"fecha_transferencia":"2025-02-01",
+					"cuenta_debito":"33333333",
+					"cuenta_credito":"44444444"
+				}
+			]
+		response
+			[
+				{
+					"id": 2,
+					"empresaId": 1,
+					"importe": 1000.0,
+					"fecha_transferencia": "2025-01-01",
+					"cuenta_debito": "11111111",
+					"cuenta_credito": "22222222"
+				},
+				{
+					"id": 3,
+					"empresaId": 2,
+					"importe": 2000.0,
+					"fecha_transferencia": "2025-02-01",
+					"cuenta_debito": "33333333",
+					"cuenta_credito": "44444444"
+				}
+			]
+7) Crear un registro de una transferencia
+	http://localhost:8080/itbk/transferencia		POST
+		request body
+			{
+				"empresaId":1,
+				"importe":"1000.88",
+				"fecha_transferencia":"2025-01-01",
+				"cuenta_debito": "11111111",
+				"cuenta_credito":"88888888"
+			}
+		response
+			{
+				"id": 1,
+				"empresaId": 1,
+				"importe": 1000.88,
+				"fecha_transferencia": "2025-01-01",
+				"cuenta_debito": "11111111",
+				"cuenta_credito": "88888888"
+			}
+
+8) Obtener todos los registros de transferencias
+	http://localhost:8080/itbk/transferencia/all		GET
+		Response
+			[
+				{
+					"id": 2,
+					"empresaId": 2,
+					"importe": 0.0,
+					"fecha_transferencia": "2025-02-01",
+					"cuenta_debito": "33333333",
+					"cuenta_credito": "44444444"
+				},
+				{
+					"id": 1,
+					"empresaId": 1,
+					"importe": 0.0,
+					"fecha_transferencia": "2025-01-01",
+					"cuenta_debito": "11111111",
+					"cuenta_credito": "22222222"
+				}
+			]
+
+9) Obtener todos los registros de transferencias de ultimo mes
+	http://localhost:8080/itbk/transferencia/lastmonth	GET
+		Response
+			[
+				{
+					"id": 2,
+					"empresaId": 2,
+					"importe": 2000.0,
+					"fecha_transferencia": "2025-02-01",
+					"cuenta_debito": "33333333",
+					"cuenta_credito": "44444444"
+				}
+			]
+
+>>>>>>> 76677caf82301354043c4d5f970771690d41ca82
