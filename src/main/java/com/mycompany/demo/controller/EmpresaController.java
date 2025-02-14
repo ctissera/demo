@@ -21,7 +21,7 @@ import com.mycompany.demo.service.EmpresaService;
 @RestController
 @RequestMapping("/itbk")
 public class EmpresaController {
- 
+
 	@Resource
 	EmpresaService empresaService;
 
