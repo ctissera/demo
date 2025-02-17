@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Table(name="EMPRESAS")
 @Entity
@@ -18,15 +20,19 @@ public class Empresa implements Serializable {
 	private Integer id;
 
 	//CUIT, Razón Social, Fecha Adhesión
-	@Column(name="cuit", columnDefinition = "varchar2(13)")
+	@Column(name="cuit", columnDefinition = "varchar2(13)", nullable = false, length=11)
 	private String cuit;
 	
+	@NotNull(message = "Razon Social no puede ser nulo")
 	@Column(name="razon_social", columnDefinition = "varchar2(100)")
 	private String razon_social;
 	
+	@NotNull(message = "Fecha de adhesion no puede ser nulo")
 	@Column(name="fecha_adhesion", columnDefinition = "date")
 	private Date fecha_adhesion;
 
+	@NotNull(message = "Telefono debe tener un valor")
+    @Size(min = 10, message = "Telefono debe tener un valor de al menos 10 digitos")
 	@Column(name="telefono", columnDefinition = "varchar2(50)")
 	private String telefono;
 	

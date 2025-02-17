@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 @Table(name="TRANSFERENCIAS")
 @Entity
@@ -18,19 +20,24 @@ public class Transferencia implements Serializable {
 	private Integer id;
 
 	@ManyToOne(fetch=FetchType.EAGER)
+	@NotNull(message = "Id de Empresa no puede ser nulo")
 	@JoinColumn(name = "empresa_id", nullable=false)
 	private Empresa empresa;
 
 	@Column(name="importe", columnDefinition = "number(20,2)")
+	@NotNull(message = "La transferencia debe tener un importe")
+	@Positive(message = "La transferencia debe un importe mayor a cero")
 	private float importe;
 	
 	@Column(name="fecha_transferencia", columnDefinition = "date")
 	private Date fecha_transferencia;
 	
 	@Column(name="cuenta_debito", columnDefinition = "varchar2(50)")
+	@NotNull(message = "Se debe especificar la cuenta de Debito")
 	private String cuenta_debito;
 
 	@Column(name="cuenta_credito", columnDefinition = "varchar2(50)")
+	@NotNull(message = "Se debe especificar la cuenta de Credito")
 	private String cuenta_credito;
 	
 	public Integer getId() {

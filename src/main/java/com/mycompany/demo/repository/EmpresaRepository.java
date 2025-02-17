@@ -3,7 +3,6 @@ package com.mycompany.demo.repository;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +13,6 @@ import com.mycompany.demo.entity.Empresa;
 
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
-
 
 	@Query("SELECT e FROM Empresa e ORDER BY e.razon_social")
 	List<Empresa> findAllEmpresa();

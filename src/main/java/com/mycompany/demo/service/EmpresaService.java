@@ -15,7 +15,7 @@ public interface EmpresaService {
 
 	List<EmpresaDto> getAllEmpresasAdheredLastMonth() throws IOException;
 	
-	Empresa getEmpresaById(Integer personId);
+	EmpresaDto getEmpresaById(Integer personId);
 	
 	Page<Empresa> getEmpresaByName(String search, Pageable pageable);
 	
@@ -23,7 +23,7 @@ public interface EmpresaService {
 	
 	List<EmpresaDto> createBulkEmpresas(List<EmpresaDto> empresaDtoList) throws Exception;
 	
-	Integer deleteEmpresa(Integer personId);
+	Integer deleteEmpresa(Integer personId) throws Exception;
 
 	EmpresaDto updateEmpresa(EmpresaDto newEmpresa) throws ParseException, IOException, Exception;
 

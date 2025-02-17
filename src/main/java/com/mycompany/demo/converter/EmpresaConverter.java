@@ -32,7 +32,6 @@ public class EmpresaConverter extends GenericConverter<EmpresaDto, Empresa>  {
 	@Override
 	public Empresa toEntity(EmpresaDto empresaDto) throws Exception {
 		// 
-		System.out.println("empresaDto.getFechaAdhesion():"+empresaDto.getFecha_adhesion());
 		Empresa empresa = new Empresa();
 		//
 		empresa.setId(empresaDto.getId());
@@ -41,7 +40,6 @@ public class EmpresaConverter extends GenericConverter<EmpresaDto, Empresa>  {
 		
 	    String strDate = empresaDto.getFecha_adhesion();  
 	    //
-	    System.out.println("strDate:"+strDate);
 	    Date fechaAdhesion = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);  
 		empresa.setFecha_adhesion(fechaAdhesion);
 		empresa.setTelefono(empresaDto.getTelefono());

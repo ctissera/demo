@@ -1,17 +1,25 @@
 package com.mycompany.demo.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 public class TransferenciaDto {
 	
 	private Integer id;
 
+	@NotNull(message = "Id de Empresa no puede ser nulo")
 	private Integer empresaId;
 
+	@NotNull(message = "La transferencia debe tener un importe")
+	@Positive(message = "La transferencia debe un importe mayor a cero")	
 	private float importe;
 	
 	private String fecha_transferencia;
 	
+	@NotNull(message = "Se debe especificar la cuenta de Debito")
 	private String cuenta_debito;
 
+	@NotNull(message = "Se debe especificar la cuenta de Credito")
 	private String cuenta_credito;
 
 	public Integer getId() {

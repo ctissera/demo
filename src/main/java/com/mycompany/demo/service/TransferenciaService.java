@@ -22,4 +22,5 @@ public interface TransferenciaService {
 
 	TransferenciaDto updateTransferencia(TransferenciaDto newTransferencia) throws ParseException, IOException, Exception;
 
+	List<TransferenciaDto> getTransferenciasByEmpresa(Integer empresaEmpresaId) throws IOException;
 }

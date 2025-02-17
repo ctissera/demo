@@ -1,17 +1,26 @@
 package com.mycompany.demo.dto;
 
 import java.util.Date;
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class EmpresaDto {
 	
 	private Integer id;
 	
+	@NotNull(message = "Cuit no puede ser nulo")
 	private String cuit;
 
+	@NotNull(message = "Razon Social no puede ser nulo")
+	@Column(name="razon_social", columnDefinition = "varchar2(100)")	
 	private String razon_social;
 
+	@NotNull(message = "Fecha de adhesion no puede ser nulo")
 	private String fecha_adhesion;
 
+	@NotNull(message = "Telefono debe tener un valor")
+    @Size(min = 10, message = "Telefono debe tener un valor de al menos 10 digitos")	
 	private String telefono;
 	
 	public Integer getId() {
@@ -29,7 +38,6 @@ public class EmpresaDto {
 	public void setCuit(String cuit) {
 		this.cuit = cuit;
 	}
-
 
 	public String getRazon_social() {
 		return razon_social;
@@ -53,7 +61,5 @@ public class EmpresaDto {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}
-
-	
+	}	
 }

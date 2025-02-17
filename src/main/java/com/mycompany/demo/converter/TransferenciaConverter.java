@@ -10,6 +10,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+
+import com.mycompany.demo.dto.EmpresaDto;
 import com.mycompany.demo.dto.TransferenciaDto;
 import com.mycompany.demo.entity.Empresa;
 import com.mycompany.demo.entity.Transferencia;
@@ -22,6 +24,9 @@ public class TransferenciaConverter extends GenericConverter<TransferenciaDto, T
 	
 	@Resource
 	EmpresaService empresaService;
+
+	@Resource
+	EmpresaConverter empresaConverter;
 	
 	@Override
 	public TransferenciaDto toDto(Transferencia entity) throws IOException {
@@ -45,9 +50,12 @@ public class TransferenciaConverter extends GenericConverter<TransferenciaDto, T
 		// 
 		Transferencia transferencia = new Transferencia();
 		transferencia.setId(transferenciaDto.getId());
-		Empresa empresa = empresaService.getEmpresaById(transferenciaDto.getEmpresaId());
+		Integer empresaId = transferenciaDto.getEmpresaId();
+		
+		EmpresaDto empresaDto = empresaService.getEmpresaById(empresaId);
+		
 		transferencia.setImporte(transferenciaDto.getImporte());
-		transferencia.setEmpresa(empresa);
+		transferencia.setEmpresa( empresaConverter.toEntity(empresaDto));
 		transferencia.setCuenta_credito(transferenciaDto.getCuenta_credito());
 		transferencia.setCuenta_debito(transferenciaDto.getCuenta_debito());
 		

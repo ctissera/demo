@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -74,14 +76,14 @@ public class TransferenciaServiceImpl  implements TransferenciaService  {
 	}
 
 	@Override
-	public TransferenciaDto createTransferencia(TransferenciaDto transferenciaDto) throws Exception {
+	public TransferenciaDto createTransferencia(@Valid TransferenciaDto transferenciaDto) throws Exception {
 		// 
 		Transferencia transferencia = transferenciaConverter.toEntity(transferenciaDto);
 		return transferenciaConverter.toDto(transferenciaRepository.save(transferencia));
 	}
 
 	@Override
-	public TransferenciaDto updateTransferencia(TransferenciaDto newTransferenciaDto) throws Exception {
+	public TransferenciaDto updateTransferencia(@Valid TransferenciaDto newTransferenciaDto) throws Exception {
 		//
 		Transferencia newTransferencia = transferenciaConverter.toEntity(newTransferenciaDto);
 		
@@ -112,7 +114,11 @@ public class TransferenciaServiceImpl  implements TransferenciaService  {
 			return 1;
 		}
 		return 0;
-		
+	}
+
+	@Override
+	public List<TransferenciaDto> getTransferenciasByEmpresa(Integer empresaId) throws IOException {
+		return transferenciaConverter.toDtoList( transferenciaRepository.findTransferenciasByEmpresaId(empresaId) );
 	}
 
 

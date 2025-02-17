@@ -17,6 +17,10 @@ import com.mycompany.demo.dto.EmpresaDto;
 import com.mycompany.demo.entity.Empresa;
 import com.mycompany.demo.repository.EmpresaRepository;
 import com.mycompany.demo.service.exception.BadRequestException;
+import com.mycompany.demo.service.validator.EmpresaValidator;
+import javax.validation.Valid;
+import com.fasterxml.jackson.databind.ObjectMapper; 
+import com.fasterxml.jackson.databind.ObjectWriter; 
 
 @Service
 public class EmpresaServiceImpl  implements EmpresaService  {
@@ -28,14 +32,21 @@ public class EmpresaServiceImpl  implements EmpresaService  {
 	@Resource
 	EmpresaConverter empresaConverter;
 
+	@Resource
+	EmpresaValidator empresaValidator; 
+
 	@Override
-	public EmpresaDto createEmpresa(EmpresaDto empresaDto) throws Exception {
+	public EmpresaDto createEmpresa(@Valid EmpresaDto empresaDto) throws Exception {
 		// 
 		if(empresaDto.getCuit() != null ) {
+			empresaValidator.validateFormatCuit(empresaDto.getCuit());
 			Empresa oldEmpresa = empresaRepository.findEmpresaByCuit(empresaDto.getCuit());
 			if(oldEmpresa != null) {	
 					throw new BadRequestException("Ya existe una empresaa con el CUIT especificado " );			
 			}
+		}
+		else {
+			throw new BadRequestException("Debe especificar el CUIT de la empresa");
 		}
 		//
 		Empresa empresa = empresaConverter.toEntity(empresaDto);
@@ -52,9 +63,16 @@ public class EmpresaServiceImpl  implements EmpresaService  {
 	}
 
 	@Override
-	public Empresa getEmpresaById(Integer empresaId) {
+	public EmpresaDto getEmpresaById(Integer empresaId) {
 		// 
-		return empresaRepository.findEmpresaById(empresaId) ;
+		EmpresaDto empresaDto = new EmpresaDto();
+		try {
+			empresaDto = empresaConverter.toDto(empresaRepository.findEmpresaById(empresaId));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return empresaDto;
 	}
 
 	@Override
@@ -64,10 +82,12 @@ public class EmpresaServiceImpl  implements EmpresaService  {
 	}
 
 	@Override
-	public EmpresaDto updateEmpresa(EmpresaDto newEmpresaDto) throws Exception {
+	public EmpresaDto updateEmpresa(@Valid EmpresaDto newEmpresaDto) throws Exception {
 		//
 		Empresa newEmpresa = empresaConverter.toEntity(newEmpresaDto);
 		
+		empresaValidator.validateUpdateOrCreateEmpresa(newEmpresa);
+
 		Empresa oldEmpresa = empresaRepository.findEmpresaById(newEmpresa.getId());
 		if(oldEmpresa == null) {	
 				throw new BadRequestException("No existe la empresa especificada " );			
@@ -83,7 +103,7 @@ public class EmpresaServiceImpl  implements EmpresaService  {
 	}
 
 	@Override
-	public Integer deleteEmpresa(Integer empresaId) {
+	public Integer deleteEmpresa(@Valid Integer empresaId) throws Exception {
 		//
 		
 		Empresa empresaForDelete =  empresaRepository.findEmpresaById(empresaId);
@@ -91,6 +111,7 @@ public class EmpresaServiceImpl  implements EmpresaService  {
 			return 0;
 		}
 		else {
+			empresaValidator.validateDeleteEmpresa(empresaForDelete);
 			empresaRepository.delete(empresaForDelete);
 		}
 		//
@@ -115,8 +136,13 @@ public class EmpresaServiceImpl  implements EmpresaService  {
 				}
 				Empresa empresa;
 				try {
+					ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+					System.out.println("empresaDto= " + ow.writeValueAsString(empresaDto));
 					empresa = empresaConverter.toEntity(empresaDto);
+					System.out.println("empresa= " + ow.writeValueAsString(empresa));
+					
 					empresaConverter.toDto(empresaRepository.save(empresa));
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
